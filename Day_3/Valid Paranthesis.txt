@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+        if(s.length()%2!=0) return false;
+        for(char d:s.toCharArray())
+        {
+            if(d=='[' || d=='{' ||d=='(') st.push(d);
+            else if(d==']')
+            {
+                if (st.isEmpty() || st.pop() != '[') {
+                    return false;  // Mismatch or stack is empty
+                }
+                // if(!st.isEmpty() && st.peek()=='[') st.pop();
+            }
+            else if(d=='}')
+            {
+                if(st.isEmpty()|| st.pop()!='{') return false;
+            }
+            else if(d==')')
+            {
+                if(st.isEmpty() || st.pop()!='(') return false;
+            }
+        }
+        // System.out.println(st.size());
+        return st.isEmpty();
+    }
+}
